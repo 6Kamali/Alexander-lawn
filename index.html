@@ -3,20 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alexander Yard Works</title>
+    <title>Alexander Yard Works | Premium Property Maintenance</title>
     <style>
-        /* --- DESIGN SYSTEM & CSS VARIABLES --- */
+        /* --- HIGH-GLOSS DESIGN SYSTEM --- */
         :root {
-            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #064e3b 100%);
-            --glass-bg: rgba(255, 255, 255, 0.06);
-            --glass-border: rgba(255, 255, 255, 0.12);
-            --glass-highlight: rgba(255, 255, 255, 0.2);
+            --bg-gradient: linear-gradient(135deg, #0b0f19 0%, #111827 40%, #042f1a 100%);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-highlight: rgba(255, 255, 255, 0.15);
             --text-main: #f8fafc;
-            --text-muted: #cbd5e1;
-            --accent-green: #4ade80;
-            --accent-blue: #38bdf8;
-            --gradient-accent: linear-gradient(90deg, #38bdf8, #4ade80);
-            --radius: 16px;
+            --text-muted: #94a3b8;
+            --accent-glow: rgba(56, 189, 248, 0.15);
+            
+            /* High-shine animated gradients */
+            --gradient-primary: linear-gradient(90deg, #38bdf8, #4ade80, #38bdf8);
+            --gradient-card-shine: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.02) 100%);
+            
+            --radius: 20px;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         * {
@@ -24,6 +28,7 @@
             margin: 0;
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
@@ -34,91 +39,100 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
+            padding: 30px 20px;
             overflow-x: hidden;
         }
 
-        /* --- GLASSMORPHISM BASE --- */
+        /* --- THE SHINE & GLASSMORPHISM CORE --- */
         .glass-panel {
             background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: var(--radius);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .glass-panel:hover {
-            border-color: var(--glass-highlight);
-            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+            z-index: 1;
         }
 
         /* --- HEADER & NAVIGATION --- */
         header {
             width: 100%;
             max-width: 1200px;
-            margin-bottom: 24px;
+            margin-bottom: 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
+            padding: 16px 32px;
+            background: rgba(255, 255, 255, 0.02);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255,255,255,0.05);
         }
 
         .logo-area {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
 
         .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--gradient-accent);
-            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, #38bdf8, #4ade80);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            color: #0f172a;
+            font-weight: 800;
+            color: #0b0f19;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 20px rgba(74, 222, 128, 0.4);
         }
 
         .logo-text h1 {
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-            background: var(--gradient-accent);
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            background: var(--gradient-primary);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: shineText 4s linear infinite;
         }
 
         nav {
             display: flex;
-            gap: 8px;
+            gap: 6px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 4px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
         }
 
         nav button {
             background: transparent;
-            border: 1px solid transparent;
+            border: none;
             color: var(--text-muted);
-            padding: 10px 16px;
+            padding: 8px 18px;
             border-radius: 30px;
             cursor: pointer;
             font-weight: 500;
-            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            transition: var(--transition);
         }
 
         nav button:hover {
-            background: rgba(255, 255, 255, 0.05);
             color: var(--text-main);
+            background: rgba(255, 255, 255, 0.03);
         }
 
         nav button.active {
-            background: var(--glass-highlight);
-            border-color: var(--glass-border);
+            background: rgba(255, 255, 255, 0.08);
             color: var(--text-main);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1), 0 2px 10px rgba(0,0,0,0.2);
         }
 
-        /* --- CONTAINER & BENTO GRID LAYOUT --- */
+        /* --- BENTO CANVA GRID LAYOUT --- */
         main {
             width: 100%;
             max-width: 1200px;
@@ -129,120 +143,153 @@
             display: none;
             grid-template-columns: repeat(12, 1fr);
             gap: 20px;
-            animation: fadeIn 0.5s ease forward;
+            animation: stageIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         .page.active {
             display: grid;
         }
 
-        /* Bento Grid Item Utilities */
+        /* Bento Columns */
         .col-4 { grid-column: span 4; }
         .col-6 { grid-column: span 6; }
         .col-8 { grid-column: span 8; }
         .col-12 { grid-column: span 12; }
 
+        /* The Premium Bento Card */
         .bento-card {
-            padding: 30px;
+            padding: 35px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            position: relative;
             overflow: hidden;
+            background-image: var(--gradient-card-shine);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
         }
 
-        /* --- TYPOGRAPHY & VISUALS --- */
+        /* High-Shine Glow Hover Effect */
+        .bento-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(800px circle at var(--x, 0px) var(--y, 0px), rgba(255,255,255,0.04), transparent 40%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 30px var(--accent-glow);
+        }
+
+        /* --- TYPOGRAPHY & VISUAL ACCENTS --- */
         h2 {
-            font-size: 2rem;
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
             margin-bottom: 16px;
-            font-weight: 700;
+            line-height: 1.2;
         }
 
         h3 {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: -0.2px;
             margin-bottom: 12px;
-            color: var(--accent-blue);
+            color: #38bdf8;
         }
 
         p {
             color: var(--text-muted);
-            line-height: 1.6;
-            font-size: 1rem;
+            line-height: 1.65;
+            font-size: 0.98rem;
         }
 
         .accent-text {
-            background: var(--gradient-accent);
+            background: linear-gradient(90deg, #38bdf8, #4ade80);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: bold;
+            font-weight: 700;
         }
 
-        /* --- PAGE SPECIFIC ELEMENTS --- */
-        /* Home Hero */
         .hero-title {
-            font-size: 3rem;
-            line-height: 1.2;
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1px;
             margin-bottom: 20px;
         }
 
         .stat-number {
-            font-size: 3.5rem;
-            font-weight: 800;
-            background: var(--gradient-accent);
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            background: linear-gradient(180deg, #ffffff 30%, #94a3b8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 10px;
         }
 
-        /* Services List */
+        /* Premium Service Pill Tags */
         .service-tag {
             display: inline-block;
-            padding: 6px 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
+            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 30px;
             margin: 4px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #e2e8f0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        /* Legal Disclaimer Footer Badge */
+        /* High-End Timeline Node */
+        .timeline-card {
+            border-left: 3px solid #4ade80;
+            padding-left: 20px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+
+        /* Structural Disclaimer Banner */
         .disclaimer-bar {
             grid-column: span 12;
-            padding: 15px;
+            padding: 18px;
             text-align: center;
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.2);
+            background: rgba(248, 113, 113, 0.03);
+            border: 1px solid rgba(248, 113, 113, 0.12);
             border-radius: var(--radius);
             font-size: 0.85rem;
             color: #fca5a5;
+            letter-spacing: 0.3px;
+            box-shadow: inset 0 1px 10px rgba(248, 113, 113, 0.02);
         }
 
         /* --- ANIMATIONS --- */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes stageIn {
+            from { opacity: 0; transform: translateY(16px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- RESPONSIVE DESIGN --- */
-        @media (max-width: 900px) {
-            .col-4, .col-6, .col-8 {
-                grid-column: span 12;
-            }
-            header {
-                flex-direction: column;
-                gap: 16px;
-            }
-            nav {
-                width: 100%;
-                overflow-x: auto;
-                justify-content: flex-start;
-                padding-bottom: 8px;
-            }
+        @keyframes shineText {
+            to { background-position: 200% center; }
+        }
+
+        /* --- RESPONSIVE OPTIMIZATIONS --- */
+        @media (max-width: 960px) {
+            .col-4, .col-6, .col-8 { grid-column: span 12; }
+            header { flex-direction: column; gap: 20px; padding: 20px; }
+            nav { width: 100%; justify-content: center; }
+            .hero-title { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- SYSTEM HEADER -->
+    <!-- APPLICATION HEADER -->
     <header class="glass-panel">
         <div class="logo-area">
             <div class="logo-icon">AYW</div>
@@ -251,126 +298,136 @@
             </div>
         </div>
         <nav>
-            <button class="nav-btn active" onclick="switchPage('home')">Home</button>
-            <button class="nav-btn" onclick="switchPage('story')">Our Story</button>
-            <button class="nav-btn" onclick="switchPage('services')">Services</button>
-            <button class="nav-btn" onclick="switchPage('operations')">How We Run</button>
+            <button class="nav-btn active" onclick="switchPage('home')">Overview</button>
+            <button class="nav-btn" onclick="switchPage('story')">Our Journey</button>
+            <button class="nav-btn" onclick="switchPage('services')">Services Portfolio</button>
+            <button class="nav-btn" onclick="switchPage('operations')">Transparency</button>
         </nav>
     </header>
 
-    <!-- MAIN BENTO CANVAS -->
+    <!-- CENTRAL BENTO CANVAS -->
     <main>
 
-        <!-- PAGE 1: HOME -->
+        <!-- PAGE 1: OVERVIEW (HOME) -->
         <div id="home" class="page active">
             <div class="bento-card glass-panel col-8">
                 <div>
-                    <h2 class="hero-title">Next-Gen Turf Care, Built Seamlessly.</h2>
-                    <p>Welcome to Alexander Yard Works. We craft premium outdoor spaces using modern techniques, delivering absolute precision to every patch of green we touch.</p>
+                    <h2 class="hero-title">Architecting Pristine Lawns & Outdoor Spaces.</h2>
+                    <p>Welcome to Alexander Yard Works. We merge efficient operations with elite craftsmanship, rendering sleek lines and flawless property management across the neighborhood landscape.</p>
                 </div>
             </div>
-            <div class="bento-card glass-panel col-4" style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(74, 222, 128, 0.1));">
-                <h3>The Mission</h3>
-                <p>Keeping properties pristine without the corporate complexity. Straightforward yard care that speaks for itself.</p>
+            <div class="bento-card glass-panel col-4" style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.03) 0%, rgba(74, 222, 128, 0.03) 100%);">
+                <h3>Our Blueprint</h3>
+                <p>Eliminating bloated corporate management to bring property owners clear, prompt execution, beautiful lawn aesthetics, and unparalleled reliability.</p>
             </div>
             <div class="bento-card glass-panel col-4">
                 <div class="stat-number">2022</div>
-                <p>The year the first engine pulled start, changing our neighborhood standard forever.</p>
+                <h3>Inception Year</h3>
+                <p>A single, high-effort operation that quickly evolved into a premium neighborhood project.</p>
             </div>
             <div class="bento-card glass-panel col-4">
                 <div class="stat-number">100%</div>
-                <p>Dedicated to maximizing local property aesthetics and handling heavy yard tasks.</p>
+                <h3>Youth Operated</h3>
+                <p>Meticulously structured, organized, and engineered locally for high-end workspace delivery.</p>
             </div>
             <div class="bento-card glass-panel col-4">
-                <h3>Fleet Status</h3>
-                <p>Upgraded from push power to heavy-duty commercial style ride-on machinery for maximum efficiency.</p>
+                <h3>Machinery Fleet</h3>
+                <p>We leverage robust commercial riding units alongside precision instruments to maximize daily output and reduce timeline footprint.</p>
             </div>
             <div class="disclaimer-bar">
-                ⚠️ Notice: Alexander Yard Works is a private community initiative run locally. It is not registered as a formal legal corporation or licensed papered business.
+                ⚡ OPERATIONAL NOTICE: Alexander Yard Works operates as a private community project. We are not an incorporated, registered commercial business entity and maintain no formal corporate filings.
             </div>
         </div>
 
-        <!-- PAGE 2: OUR STORY -->
+        <!-- PAGE 2: OUR JOURNEY (STORY) -->
         <div id="story" class="page">
-            <div class="bento-card glass-panel col-6">
-                <h2>The Origin Engine</h2>
-                <p>Every great project starts with minimal overhead. In <strong>2022</strong>, Alexander Yard Works kicked off with nothing more than a single, basic push mower and a solid work ethic. Footing it door-to-door, we learned the subtle nuances of precise cutting patterns and built our core community clientele from the ground up.</p>
+            <div class="bento-card glass-panel col-6 timeline-card">
+                <div class="stat-number" style="font-size: 2.5rem; background: linear-gradient(90deg, #fff, #94a3b8); -webkit-background-clip: text;">2022: The Push Power Era</div>
+                <p>Every elite venture roots from raw execution. Alexander Yard Works launched in <strong>2022</strong> utilizing a basic manual push mower. Moving door-to-door, we learned fine mechanical diagnostics, mastered clean cutting matrices, and systematically built a loyal neighborhood footprint.</p>
             </div>
-            <div class="bento-card glass-panel col-6">
-                <h2>Scaling the Fleet</h2>
-                <p>As yard demands grew, manual pushing wasn't fast enough. We reinvested into high-efficiency <strong>ride-on mowers</strong>. This technological leap scaled up our output speed exponentially, allowing us to take on massive commercial-sized rural properties and drastically optimize our scheduling footprint.</p>
+            <div class="bento-card glass-panel col-6" style="border-left: 3px solid #38bdf8; border-radius: 0 var(--radius) var(--radius) 0;">
+                <div class="stat-number" style="font-size: 2.5rem; background: linear-gradient(90deg, #fff, #94a3b8); -webkit-background-clip: text;">The Ride-On Scale Up</div>
+                <p>As contract volume surged, we scaled up infrastructure. By incorporating commercial-grade <strong>ride-on machinery</strong> into our fleet, operational velocity tripled. This allowed us to manage extensive rural lots, optimize weekly routing schedules, and maintain top-tier consistency.</p>
             </div>
             <div class="bento-card glass-panel col-12">
-                <h3>Meet the Founder</h3>
-                <p>Alexander Yard Works is entirely owned and operated by <span class="accent-text">Allee Kamali</span>, a 16-year-old entrepreneur with a passion for high-end execution. From managing equipment mechanics to communicating with clients directly, Allee oversees every square inch of production to ensure professional results across the board.</p>
+                <h3>Leadership & Execution</h3>
+                <p>Alexander Yard Works is envisioned, managed, and executed by <span class="accent-text">Allee Kamali</span>, a 16-year-old entrepreneur in Alexander, MB. Handling client coordination, machinery tuning, and on-site tactical management, Allee drives the project's uncompromising commitment to pristine turf formatting.</p>
             </div>
         </div>
 
-        <!-- PAGE 3: SERVICES -->
+        <!-- PAGE 3: SERVICES PORTFOLIO -->
         <div id="services" class="page">
             <div class="bento-card glass-panel col-4">
-                <h3>01 / Precision Mowing</h3>
-                <p>Sleek, clean linear passes tailored perfectly to your turf type. Includes standard edging along fences and walkways.</p>
+                <h3 style="color: #4ade80;">01 / Precision Turf Mowing</h3>
+                <p>Sharply tracked, dynamic cutting lanes built to match your grass species. Includes standard line trimming across obstacles and perimeter walls.</p>
             </div>
             <div class="bento-card glass-panel col-4">
-                <h3>02 / Yard Cleanups</h3>
-                <p>Comprehensive seasonal overhauls. We clear out leaves, twigs, overgrown brush, and winter clutter to restore order.</p>
+                <h3 style="color: #4ade80;">02 / Seasonal Yard Cleanup</h3>
+                <p>Overhaul logistics designed to eliminate leaves, branches, thatch layers, and clutter, bringing stark structure back to your layout.</p>
             </div>
             <div class="bento-card glass-panel col-4">
-                <h3>03 / Garbage Runs</h3>
-                <p>Hauling junk, construction materials, or standard yard waste away. Fast property cleanup solutions when you need items gone.</p>
+                <h3 style="color: #4ade80;">03 / Clean Debris & Garbage Runs</h3>
+                <p>Rapid sorting, hauling, and removal of waste, renovation scrap, or structural yard debris. Keeping properties spotless and secure.</p>
             </div>
             <div class="bento-card glass-panel col-6">
-                <h3>🌾 Farm Fresh Extras</h3>
-                <p>Beyond landscaping, we offer local, naturally harvested <strong>fresh chicken eggs</strong> directly delivered to neighbors in the area. Crisp, organic, and gathered daily.</p>
+                <h3>🌾 Farm Fresh Offerings</h3>
+                <p>Alongside architectural groundskeeping, we offer local, freshly gathered <strong>chicken eggs</strong> straight to our residential clients. High-quality, micro-farm sourced, and brought right to your door.</p>
             </div>
             <div class="bento-card glass-panel col-6">
-                <h3>And Extra Projects...</h3>
-                <p>Have a custom job or unique technical request? From moving heavy hardware to minor outdoor maintenance projects, we easily flex to meet individual client specifications.</p>
+                <h3>Custom Project Execution</h3>
+                <p>Have a custom property problem? From mulch layout formatting to logistical transport and general landscape assistance, our workflow scales flexibly to match your precise specs.</p>
                 <div style="margin-top: 15px;">
-                    <span class="service-tag">Hedge Trimming</span>
-                    <span class="service-tag">Debris Hauling</span>
-                    <span class="service-tag">Mulch Spread</span>
+                    <span class="service-tag">Hedge Sculpting</span>
+                    <span class="service-tag">Waste Transport</span>
+                    <span class="service-tag">Material Spreading</span>
                 </div>
             </div>
         </div>
 
-        <!-- PAGE 4: OPERATIONS & TRANSPARENCY -->
+        <!-- PAGE 4: TRANSPARENCY (OPERATIONS) -->
         <div id="operations" class="page">
             <div class="bento-card glass-panel col-8">
-                <h2>Transparent, Practical Operation</h2>
-                <p>We believe in straight-shooting logistics. Alexander Yard Works is structured as a dedicated, independent local project. We focus heavily on producing high-tier physical results without the dense layers of corporate administration.</p>
+                <h2>Direct, Independent Architecture</h2>
+                <p>We pride ourselves on direct interaction. Alexander Yard Works bypasses the traditional bureaucratic overhead of mainstream corporations. Our framework is optimized entirely for rapid real-world property outcomes, transparent communication, and elite field quality.</p>
             </div>
-            <div class="bento-card glass-panel col-4" style="border: 1px solid rgba(239, 68, 68, 0.3);">
-                <h3 style="color: #f87171;">Structural Disclaimer</h3>
-                <p>Please note: We are <strong>not a registered, papered business entity</strong>. There is no official legal paperwork, corporate filing, or complex accounting matrix behind our name. It is a premium community hobby-service operated directly with neighbors.</p>
+            <div class="bento-card glass-panel col-4" style="border: 1px solid rgba(248, 113, 113, 0.25);">
+                <h3 style="color: #f87171;">Structural Disclosure</h3>
+                <p>Please note: This venture is <strong>not registered as a legal, formal papered business entity</strong>. There is no corporate registry, legal filing paperwork, or bureaucratic administrative engine behind our work. It is run directly as a high-tier local neighborhood service.</p>
             </div>
             <div class="bento-card glass-panel col-12">
-                <h3>Why Work With Us?</h3>
-                <p>Because you deal straight with the owner, get immediate responses, avoid bureaucratic corporate markup fees, and actively support a local youth enterprise that takes genuine pride in hard physical labor.</p>
+                <h3>The Value Advantage</h3>
+                <p>By keeping our layout streamlined and direct, clients experience immediate response turnarounds, customized project formatting, zero artificial administrative fees, and the opportunity to support native, young community enterprise built on pure work ethic.</p>
             </div>
         </div>
 
     </main>
 
-    <!-- JAVASCRIPT FOR PAGE NAVIGATION -->
+    <!-- INTERACTIVE CARD SHINE & PAGE SWITCH LOGIC -->
     <script>
+        // Smooth Tab-Page Switching Matrix
         function switchPage(pageId) {
-            // Hide all pages
             const pages = document.querySelectorAll('.page');
             pages.forEach(page => page.classList.remove('active'));
 
-            // Deactivate all nav buttons
             const buttons = document.querySelectorAll('.nav-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
 
-            // Show selected page
             document.getElementById(pageId).classList.add('active');
 
-            // Find clicked button and highlight it
             const clickedBtn = Array.from(buttons).find(btn => btn.getAttribute('onclick').includes(pageId));
             if(clickedBtn) clickedBtn.classList.add('active');
         }
+
+        // High-Gloss Dynamic Mouse Track Shine Effect
+        document.querySelectorAll('.bento-card').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--x', `${x}px`);
+                card.style.setProperty('--y', `${y}px`);
+            });
+        });
     </script>
 </body>
 </html>
